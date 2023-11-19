@@ -1,34 +1,30 @@
 from typing import List
-from enum import Enum
 from fastapi import APIRouter
 from pydantic import BaseModel
 from openai import OpenAI
 from instructor import patch
+from datetime import datetime
+
+from ....db.models.queries import QueryDatabaseClient, QueryDatabaseModel
 
 client = patch(OpenAI())
 
 
-class CategoryEnum(str, Enum):
-    objects = "objects"
-    items = "items"
-    names = "names"
-    places = "places"
-
-
-class ValueModel(BaseModel):
-    value: str
-
-
 class ResponseModel(BaseModel):
-    values: List[ValueModel]
-    # category: CategoryEnum
+    values: List[str]
 
 
 router = APIRouter()
 
+"""
+This connects to our DynamoDb table
+"""
+db_client = QueryDatabaseClient()
+
 
 @router.get("/generate/")
 def generate_list(query: str, count: int = 20):
+    # generate new completion with query
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         response_model=ResponseModel,
@@ -39,6 +35,13 @@ def generate_list(query: str, count: int = 20):
                 "content": f"Generate a list of {count} {query} for a Dungeons and Dragons campaign",
             }
         ],
+    )
+
+    # save query
+    db_client.save_query(
+        QueryDatabaseModel(
+            values=response.values, q=query, timestamp=datetime.now().isoformat()
+        )
     )
 
     return response
