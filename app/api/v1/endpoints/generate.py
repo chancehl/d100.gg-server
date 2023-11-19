@@ -21,14 +21,14 @@ class ValueModel(BaseModel):
 
 class ResponseModel(BaseModel):
     values: List[ValueModel]
-    category: CategoryEnum
+    # category: CategoryEnum
 
 
 router = APIRouter()
 
 
 @router.get("/generate/")
-def generate_list(query: str):
+def generate_list(query: str, count: int = 20):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         response_model=ResponseModel,
@@ -36,7 +36,7 @@ def generate_list(query: str):
         messages=[
             {
                 "role": "user",
-                "content": f"Generate a list of 25 {query} for a Dungeons and Dragons campaign",
+                "content": f"Generate a list of {count} {query} for a Dungeons and Dragons campaign",
             }
         ],
     )
