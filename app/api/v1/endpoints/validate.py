@@ -16,7 +16,7 @@ router = APIRouter()
 
 
 @router.get("/validate/")
-def generate_list(q: str):
+def validate_query(q: str):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         response_model=ResponseModel,
