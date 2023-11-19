@@ -7,18 +7,15 @@ from instructor import patch
 client = patch(OpenAI())
 
 
-class ValueModel(BaseModel):
-    value: str
-
-
 class ResponseModel(BaseModel):
-    values: List[ValueModel]
+    confidence: float
+    is_valid: bool
 
 
 router = APIRouter()
 
 
-@router.get("/generate/")
+@router.get("/validate/")
 def generate_list(q: str):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -26,7 +23,7 @@ def generate_list(q: str):
         messages=[
             {
                 "role": "user",
-                "content": f"Generate a list of 25 {q} for a Dungeons and Dragons campaign",
+                "content": f"Determine whether or not this is a valid thing you'd find within a Dungeons and Dragons universe: {q}",
             }
         ],
     )
