@@ -5,7 +5,7 @@ from openai import OpenAI
 from instructor import patch
 from datetime import datetime
 
-from ....db.models.queries import QueryDatabaseClient, QueryDatabaseModel
+from app.db.models.queries import QueryDatabaseClient, QueryDatabaseModel
 
 client = patch(OpenAI())
 

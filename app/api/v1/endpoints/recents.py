@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from typing import List
 from pydantic import BaseModel
 
-from ....db.models.queries import QueryDatabaseClient, QueryDatabaseModel
+from app.db.models.queries import QueryDatabaseClient, QueryDatabaseModel
 
 
 class ResponseModel(BaseModel):
