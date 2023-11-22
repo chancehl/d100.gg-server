@@ -1,8 +1,16 @@
 from fastapi import APIRouter
 
-from .endpoints import generate, validate, recents
+from app.api.v1.endpoints import validate, recents
+from app.api.v1.endpoints.generate import name, weapon
 
 router = APIRouter()
-router.include_router(generate.router)
+
+# validate
 router.include_router(validate.router)
+
+# recent queries
 router.include_router(recents.router)
+
+# generators
+router.include_router(name.router)
+router.include_router(weapon.router)
