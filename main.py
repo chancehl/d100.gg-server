@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from datetime import datetime
-from app.api.v1.api import router as api_router
+
+from app.api.v1.router import router as api_router
 
 app = FastAPI()
 
