@@ -1,9 +1,12 @@
 from fastapi import APIRouter, Query
+from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from datetime import datetime
 from typing import Annotated
 
 from app.db.models.queries import QueryDatabaseClient, QueryDatabaseModel
 from app.services.generation.monster import MonsterGenerationService
+from app.services.generation.image import ImageGenerationService
 
 
 router = APIRouter()
@@ -13,11 +16,15 @@ db_client = QueryDatabaseClient()
 
 @router.post("/generate/monster")
 def generate_names(query: str, level: Annotated[int, Query(title="The level of the monster", ge=1, lt=20)] = 1, count: int = 1):
-    # instantiate the appropriate generator service
-    service = MonsterGenerationService()
+    # instantiate the appropriate generator service(s)
+    monster_service = MonsterGenerationService()
+    image_service = ImageGenerationService()
 
     # generate new completion with query
-    response = service.generate(query, level, count)
+    monsters = monster_service.generate(query, level, count)
+
+    # generate new image with query
+    image = image_service.generate(monsters.values[0])
 
     # save query
     # db_client.save_query(
@@ -26,4 +33,11 @@ def generate_names(query: str, level: Annotated[int, Query(title="The level of t
     #     )
     # )
 
-    return response
+    # create response dict
+    response = { "monster": monsters.values[0], "image": image }
+
+    # json encode
+    response_json = jsonable_encoder(response)
+
+    # return response
+    return JSONResponse(content=response_json)
