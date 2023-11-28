@@ -7,15 +7,13 @@ class DamageModel(BaseModel):
     num_dice: int
     dice_sides: int
     damage_type: str
-
-class WeaponRangeModel(BaseModel):
-    melee: int | str
-    thrown: int | str
+    
 
 class StatBlockModel(BaseModel):
     attack_type: str
     reach: int
-    range: WeaponRangeModel
+    melee_range: int
+    thrown_range: int
     damage: DamageModel
     weight: int
     properties: List[str]
