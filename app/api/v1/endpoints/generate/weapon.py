@@ -16,7 +16,7 @@ db_client = QueryDatabaseClient()
 
 
 @router.post("/generate/weapon")
-def generate_weapons(query: str, count: int = 20):
+def generate_weapons(query: str, count: int = 1):
     # instantiate the appropriate generator service(s)
     weapon_service = WeaponGenerationService()
     image_service = ImageGenerationService()
