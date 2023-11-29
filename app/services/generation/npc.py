@@ -22,7 +22,7 @@ class NpcGenerationService(GenerationService):
         super().__init__()
 
     def generate(self, query: str, count: int = 1) -> GeneratedNpcModel:
-        completion = self.client.chat.completions.create(
+        completion = self._client.chat.completions.create(
             model="gpt-3.5-turbo",
             response_model=GeneratedNpcModel,
             max_retries=2,

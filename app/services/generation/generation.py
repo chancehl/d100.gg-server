@@ -3,7 +3,7 @@ from openai import OpenAI, AsyncOpenAI
 
 
 class GenerationService:
-    client: OpenAI | AsyncOpenAI
+    _client: OpenAI | AsyncOpenAI
 
     def __init__(self) -> None:
-        self.client = patch(OpenAI())
+        self._client = patch(OpenAI())
