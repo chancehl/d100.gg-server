@@ -1,9 +1,8 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from datetime import datetime
 
-from app.db.models.queries import QueryDatabaseClient, QueryDatabaseModel
+from app.db.models.queries import QueryDatabaseClient
 
 from app.services.generation.npc import NpcGenerationService
 from app.services.generation.image import ImageGenerationService
