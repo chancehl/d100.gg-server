@@ -1,7 +1,8 @@
-from boto3 import resource
-from boto3.dynamodb.conditions import Key, Attr
-from boto3.dynamodb.table import TableResource
 from typing import List
+
+from boto3 import resource
+from boto3.dynamodb.conditions import Key
+from boto3.dynamodb.table import TableResource
 from pydantic import BaseModel
 
 

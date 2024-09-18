@@ -1,4 +1,3 @@
-from typing import List
 from fastapi import APIRouter
 from pydantic import BaseModel
 from openai import OpenAI

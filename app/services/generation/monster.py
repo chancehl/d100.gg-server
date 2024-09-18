@@ -1,7 +1,7 @@
-from pydantic import BaseModel
 from typing import List
 
-from .generation import GenerationService
+from generation import GenerationService
+from pydantic import BaseModel
 
 
 class AttackModel(BaseModel):
@@ -23,9 +23,8 @@ class MonsterStatBlockModel(BaseModel):
     con: int
     cha: int
     wis: int
-    languages: List[str]
+    languages: List
     level: int
-    # attacks: List[AttackModel] # TODO: add this back in once I can get the prompt right
 
 
 class MonsterModel(BaseModel):
@@ -39,9 +38,6 @@ class GeneratedMonsterModel(BaseModel):
 
 
 class MonsterGenerationService(GenerationService):
-    def __init__(self) -> None:
-        super().__init__()
-
     def generate(
         self, query: str, level: int = 3, count: int = 1
     ) -> GeneratedMonsterModel:

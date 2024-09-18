@@ -1,7 +1,7 @@
-from pydantic import BaseModel
 from typing import List
 
-from .generation import GenerationService
+from pydantic import BaseModel
+from generation import GenerationService
 
 
 class DamageModel(BaseModel):
@@ -31,9 +31,6 @@ class GeneratedWeaponModel(BaseModel):
 
 
 class WeaponGenerationService(GenerationService):
-    def __init__(self) -> None:
-        super().__init__()
-
     def generate(self, query: str, count: int = 1) -> GeneratedWeaponModel:
         completion = self._client.chat.completions.create(
             model="gpt-3.5-turbo",

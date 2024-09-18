@@ -1,7 +1,8 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
-from typing import Annotated
 
 from app.db.models.queries import QueryDatabaseClient
 from app.services.generation.monster import MonsterGenerationService
