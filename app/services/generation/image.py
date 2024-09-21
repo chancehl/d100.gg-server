@@ -1,7 +1,7 @@
-from generation import GenerationService
-from monster import MonsterModel
-from weapon import WeaponModel
-from type import GenerationType
+from app.services.generation.generation import GenerationService
+from app.services.generation.monster import MonsterModel
+from app.services.generation.weapon import WeaponModel
+from app.services.generation.type import GenerationType
 
 
 class ImageGenerationService(GenerationService):

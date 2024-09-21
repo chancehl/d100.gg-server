@@ -1,9 +1,9 @@
-from fastapi import APIRouter
 from datetime import datetime
+
+from fastapi import APIRouter
 
 from app.db.models.queries import QueryDatabaseClient, QueryDatabaseModel
 from app.services.generation.name import NameGenerationService
-
 
 router = APIRouter()
 

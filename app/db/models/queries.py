@@ -1,8 +1,5 @@
 from typing import List
 
-from boto3 import resource
-from boto3.dynamodb.conditions import Key
-from boto3.dynamodb.table import TableResource
 from pydantic import BaseModel
 
 
@@ -13,38 +10,17 @@ class QueryDatabaseModel(BaseModel):
 
 
 class QueryDatabaseClient:
-    table: TableResource = None
-
     def __init__(self):
-        self.resource = resource("dynamodb")
-        self.table = self.resource.Table("queries")
+        pass
 
     def save_query(self, query: QueryDatabaseModel):
-        self.table.put_item(
-            Item={"timestamp": query.timestamp, "q": query.q, "values": query.values}
-        )
+        pass
 
     def get_recent_queries(self, count: int = 10):
-        response = self.table.scan(Limit=count)
-
-        if response["Count"] > 0:
-            return response["Items"]
-
-        return []
+        pass
 
     def lookup_query(self, query: str):
-        response = self.table.query(KeyConditionExpression=Key("q").eq(query))
-
-        if response["Count"] > 0:
-            return response["Items"][0]
-
-        return None
+        pass
 
     def update_query(self, query: str, values: List[str]):
-        response = self.table.update_item(
-            Key={"q": query},
-            UpdateExpression="SET values = :v",
-            ExpressionAttributeValues={":v": values},
-        )
-
-        return response
+        pass

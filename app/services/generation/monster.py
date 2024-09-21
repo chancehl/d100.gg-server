@@ -1,7 +1,8 @@
 from typing import List
 
-from generation import GenerationService
 from pydantic import BaseModel
+
+from app.services.generation.generation import GenerationService
 
 
 class AttackModel(BaseModel):

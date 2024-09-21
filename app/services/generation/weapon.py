@@ -1,7 +1,7 @@
 from typing import List
 
 from pydantic import BaseModel
-from generation import GenerationService
+from app.services.generation.generation import GenerationService
 
 
 class DamageModel(BaseModel):
